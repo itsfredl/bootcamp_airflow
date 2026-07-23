@@ -11,6 +11,7 @@ with DAG(
     catchup=False,
     tags=["pink"],
 ) as dag:
+
     with TaskGroup(group_id="groupe_1") as groupe_1:
         un = BashOperator(
             task_id="un",
@@ -20,6 +21,7 @@ with DAG(
             task_id="deux",
             bash_command="echo 2"
         )
+
     with TaskGroup(group_id="groupe_2") as groupe_2:
         trois = BashOperator(
             task_id="trois",
@@ -31,4 +33,5 @@ with DAG(
             bash_command="echo 4",
             trigger_rule=TriggerRule.ONE_FAILED
         )
+
 groupe_1 >> groupe_2
