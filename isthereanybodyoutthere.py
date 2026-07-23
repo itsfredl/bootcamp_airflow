@@ -22,7 +22,7 @@ with DAG(
         deux = BashOperator(
             task_id="deux",
             bash_command=f"echo '{test_variable}'",
-            return {test_variable}
+            do_xcom_push=True
         )
 
     with TaskGroup(group_id="groupe_2") as groupe_2:
