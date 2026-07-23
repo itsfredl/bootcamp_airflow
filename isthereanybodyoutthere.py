@@ -18,6 +18,7 @@ with DAG(
         un = BashOperator(
             task_id="un",
             bash_command="echo 1; false"
+            ti.xcom_pull(task_ids="groupe_1.un",value="foobar")
         )
         deux = BashOperator(
             task_id="deux",
@@ -33,7 +34,8 @@ with DAG(
         )
         quatre = BashOperator(
             task_id="quatre",
-            bash_command="echo 4",
+            retval=it.xcom_pull(task_ids="groupe_1.un",key="foobar")
+            bash_command=f"echo {retval}",
             trigger_rule=TriggerRule.ONE_FAILED
         )
 
