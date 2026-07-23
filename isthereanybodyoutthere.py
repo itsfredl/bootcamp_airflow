@@ -11,5 +11,5 @@ with DAG(
 ) as dag:
     hello = BashOperator(
         task_id="hello",
-        bash_command="echo 'is there anybody out there ?"
+        bash_command="echo 'is there anybody out there ?'"
     )
