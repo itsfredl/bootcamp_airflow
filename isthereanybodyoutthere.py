@@ -2,6 +2,7 @@ from datetime import datetime
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.utils.trigger_rule import TriggerRule
+from airflow.utils.task_group import TaskGroup
 
 with DAG(
     dag_id="dag_formation",
@@ -10,22 +11,24 @@ with DAG(
     catchup=False,
     tags=["pink"],
 ) as dag:
-    un = BashOperator(
-        task_id="un",
-        bash_command="echo 1; false"
-    )
-    deux = BashOperator(
-        task_id="deux",
-        bash_command="echo 2"
-    )
-    trois = BashOperator(
-        task_id="trois",
-        bash_command="echo 3",
-        trigger_rule=TriggerRule.ONE_SUCCESS
-    )
-    quatre = BashOperator(
-        task_id="quatre",
-        bash_command="echo 4",
-        trigger_rule=TriggerRule.ONE_FAILED
-    )
-    [ un, deux ] >> trois
+    with TaskGroup(group_id="groupe_1") as groupe_1:
+        un = BashOperator(
+            task_id="un",
+            bash_command="echo 1; false"
+        )
+        deux = BashOperator(
+            task_id="deux",
+            bash_command="echo 2"
+        )
+    with TaskGroup(group_id="groupe_2") as groupe_2:
+        trois = BashOperator(
+            task_id="trois",
+            bash_command="echo 3",
+            trigger_rule=TriggerRule.ONE_SUCCESS
+        )
+        quatre = BashOperator(
+            task_id="quatre",
+            bash_command="echo 4",
+            trigger_rule=TriggerRule.ONE_FAILED
+        )
+groupe_1 >> groupe_2
