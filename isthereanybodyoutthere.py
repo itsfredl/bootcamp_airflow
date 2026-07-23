@@ -28,4 +28,4 @@ with DAG(
         bash_command="echo 4",
         trigger_rule=TriggerRule.ONE_FAILED
     )
-    [ un, deux ] >> ( trois, quatre )
+    [ un, deux ] >> trois
