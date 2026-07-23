@@ -4,6 +4,7 @@ from airflow.operators.bash import BashOperator
 from airflow.utils.trigger_rule import TriggerRule
 from airflow.utils.task_group import TaskGroup
 from airflow.models import Variable
+from airflow.sdk.execution_time.xcom import XCom
 
 test_variable=Variable.get("key_1")
 with DAG(
