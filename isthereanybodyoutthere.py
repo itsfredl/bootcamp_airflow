@@ -9,7 +9,16 @@ with DAG(
     catchup=False,
     tags=["pink"],
 ) as dag:
-    hello = BashOperator(
-        task_id="hello",
-        bash_command="echo 'is there anybody out there ?'"
+    un = BashOperator(
+        task_id="un",
+        bash_command="echo 1"
     )
+    deux = BashOperator(
+        task_id="deux",
+        bash_command="echo 2"
+    )
+    trois = BashOperator(
+        task_id="trois",
+        bash_command="echo 3"
+    )
+    un >> deux >> trois
