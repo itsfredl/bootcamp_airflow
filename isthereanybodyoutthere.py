@@ -1,6 +1,7 @@
 from datetime import datetime
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+from airflow.utils.tigger_rule import TriggerRule
 
 with DAG(
     dag_id="dag_formation",
@@ -20,5 +21,11 @@ with DAG(
     trois = BashOperator(
         task_id="trois",
         bash_command="echo 3"
+        trigger_rule="one_failed"
     )
-    un >> [ deux, trois ]
+    quatre = BashOperator(
+        task_id="quatre",
+        bash_command="echo 4"
+        trigger_rule="none_failed"
+    )
+   [ un, deux ] >> [ trois, quatre ]
