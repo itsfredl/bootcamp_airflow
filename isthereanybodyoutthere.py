@@ -7,9 +7,9 @@ with DAG(
     start_date=datetime(2025, 1, 1),
     schedule=None,
     catchup=False,
-    tags=["guide"],
+    tags=["pink"],
 ) as dag:
     hello = BashOperator(
         task_id="hello",
-        bash_command="echo 'Airflow est prêt sur cette EC2'; hostname; date"
+        bash_command="echo 'is there anybody out there ?"
     )
