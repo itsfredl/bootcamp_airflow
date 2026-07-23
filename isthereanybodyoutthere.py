@@ -16,9 +16,9 @@ with DAG(
 
     with TaskGroup(group_id="groupe_1") as groupe_1:
         un = BashOperator(
+            ti.xcom_pull(task_ids="groupe_1.un",value="foobar"),
             task_id="un",
-            bash_command="echo 1; false",
-            ti.xcom_pull(task_ids="groupe_1.un",value="foobar")
+            bash_command="echo 1; false"
         )
         deux = BashOperator(
             task_id="deux",
