@@ -21,11 +21,11 @@ with DAG(
     trois = BashOperator(
         task_id="trois",
         bash_command="echo 3"
-        trigger_rule="one_failed"
+        trigger_rule=TriggerRule.ONE_SUCCESS
     )
     quatre = BashOperator(
         task_id="quatre",
         bash_command="echo 4"
-        trigger_rule="none_failed"
+        trigger_rule=TriggerRule.ONE_FAILED
     )
    [ un, deux ] >> [ trois, quatre ]
