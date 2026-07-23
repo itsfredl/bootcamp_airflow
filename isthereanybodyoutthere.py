@@ -12,7 +12,7 @@ with DAG(
 ) as dag:
     un = BashOperator(
         task_id="un",
-        bash_command="echo 1"
+        bash_command="echo 1; false"
     )
     deux = BashOperator(
         task_id="deux",
