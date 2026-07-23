@@ -21,7 +21,7 @@ with DAG(
         )
         deux = BashOperator(
             task_id="deux",
-            bash_command=f"echo 'test_variable}'"
+            bash_command=f"echo '{test_variable}'"
         )
 
     with TaskGroup(group_id="groupe_2") as groupe_2:
