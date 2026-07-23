@@ -21,4 +21,4 @@ with DAG(
         task_id="trois",
         bash_command="echo 3"
     )
-    un >> deux >> trois
+    un >> [ deux, trois ]
