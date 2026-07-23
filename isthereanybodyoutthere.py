@@ -34,7 +34,7 @@ with DAG(
         )
         quatre = BashOperator(
             task_id="quatre",
-            retval=it.xcom_pull(task_ids="groupe_1.un",key="foobar")
+            retval=it.xcom_pull(task_ids="groupe_1.un",key="foobar"),
             bash_command=f"echo {retval}",
             trigger_rule=TriggerRule.ONE_FAILED
         )
